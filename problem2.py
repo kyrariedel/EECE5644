@@ -37,8 +37,8 @@ e=eigvals(cov2)
 print("Eigenvalues of cov2 are:",e)
 rv2 = multivariate_normal(mean2, cov2)
 
-data1 = rv1.rvs(size = 100)
-data2 = rv2.rvs(size = 100)
+data1 = rv1.rvs(size = 10000)
+data2 = rv2.rvs(size = 10000)
 
 # Create a scatter plot
 fig	 = plt.figure()
@@ -46,11 +46,10 @@ ax = fig.add_subplot(111)
 ax.scatter(data1[:, 0], data1[:, 1], label='L = 0', alpha=0.7,c="blue")
 ax.scatter(data2[:, 0], data2[:, 1], label='L = 1', alpha=0.7, c="orange")
 
-x1, x2, x3, x4 = np.mgrid[-1:8:.01, -1:6:.01, -1:8:.01, -1:6:.01]
-pos = np.dstack((x1, x2, x3, x4))
+x1 = np.mgrid[-1:3]
 
-ax.contour(x1, x2, x3, x4, rv1.pdf(pos), levels=5,colors="blue")
-ax.contour(x1, x2, x3, x4, rv2.pdf(pos), levels=5, colors="orange")
+p_x_given_l0 = rv1.pdf(x1)
+p_x_given_l1 = rv2.pdf(x1)
 
 
 ax.set_xlabel('$x_1$')
