@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.model_selection import KFold, train_test_split, cross_val_score
 from sklearn.linear_model import LassoCV, Lasso
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import root_mean_squared_error as rmse
 import matplotlib.pyplot as plt
 from data_generator import postfix
 from data_generator import liftDataset
@@ -48,8 +48,8 @@ plt.show()
 optimal_model = Lasso(alpha=optimal_alpha)
 optimal_model.fit(X_train_lifted, y_train)
 
-rmse_train = np.sqrt(mean_squared_error(y_train, optimal_model.predict(X_train_lifted)))
-rmse_test = np.sqrt(mean_squared_error(y_test, optimal_model.predict(X_test_lifted)))
+rmse_train = rmse(y_train, optimal_model.predict(X_train_lifted))
+rmse_test = rmse(y_test, optimal_model.predict(X_test_lifted))
 
 print("Train RMSE =", rmse_train)
 print("Test RMSE =", rmse_test)
