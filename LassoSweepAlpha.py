@@ -17,10 +17,8 @@ y = np.load("y" + psfx + ".npy")
 
 print("Dataset has n=%d samples, each with d=%d features," % X.shape, "as well as %d labels." % y.shape[0])
 
-X_lifted = liftDataset(X)
-
 X_train_lifted, X_test_lifted, y_train, y_test = train_test_split(
-    X_lifted, y, test_size=0.30, random_state=42)
+    X, y, test_size=0.30, random_state=42)
 
 print("Randomly split lifted dataset to %d training and %d test samples" % (X_train_lifted.shape[0], X_test_lifted.shape[0]))
 
